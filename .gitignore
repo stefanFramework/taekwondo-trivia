@@ -1,3 +1,13 @@
+  
+# Custom files to be ignored
+.idea/
+*.bak
+.DS_Store
+docker-compose.yml
+mysql/data/*
+!mysql/data/.gitkeep
+!mysql/initial_dump/*
+
 /vendor/
 node_modules/
 npm-debug.log
