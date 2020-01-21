@@ -17,6 +17,10 @@ function install() {
     artisan key:generate
 }
 
+function run() {
+    docker-compose up -d
+}
+
 function file_exists() {
     FILE=$1; shift
     if [ -f "$FILE" ];
@@ -32,6 +36,10 @@ function artisan() {
     docker exec tkd_trivia_web php artisan $@
 }
 
+function tinker() {
+    docker exec -it tkd_trivia_web php artisan tinker
+}
+
 function logs() {
     docker exec tkd_trivia_web sh -c "tail -f /var/www/storage/logs/laravel-$(date +"%Y-%m-%d").log"
 }
@@ -40,19 +48,32 @@ function composer() {
     docker exec tkd_trivia_web composer $@
 }
 
+function help() {
+    echo "Available commands: install, run, artisan, logs, composer and help"
+}
+
 COMMAND=$1; shift
 case $COMMAND in
+    run)
+        run
+    ;;
     install)
         install
     ;;
     artisan)
         artisan $@
     ;;
+    tinker)
+        tinker
+    ;;
     logs)
         logs
     ;;
     composer)
         composer $@
+    ;;
+    help)
+        help
     ;;
     *)
         echo "Invalid command $COMMAND";
