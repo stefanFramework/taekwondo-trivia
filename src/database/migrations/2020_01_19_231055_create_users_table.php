@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('email');
-            $table->enum('profile', ['admin', 'user']);
-            $table->boolean('is_active')->default(false);
+            $table->enum('profile', ['admin', 'user'])->default('user');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
 
