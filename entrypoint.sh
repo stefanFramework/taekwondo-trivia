@@ -48,6 +48,13 @@ function composer() {
     docker exec tkd_trivia_web composer $@
 }
 
+function clear_cache() {
+    artisan cache:clear
+    artisan route:cache
+    artisan config:cache
+    artisan view:clear 
+}
+
 function help() {
     echo "Available commands: install, run, artisan, logs, composer and help"
 }
@@ -62,6 +69,9 @@ case $COMMAND in
     ;;
     artisan)
         artisan $@
+    ;;
+    clear_cache)
+        clear_cache
     ;;
     tinker)
         tinker
